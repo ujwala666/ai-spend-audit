@@ -2,7 +2,7 @@ import AuditForm from "@/components/AuditForm";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-16 flex flex-col items-center">
+    <main className="min-h-screen bg-gradient-to-b from-black to-zinc-900 text-white px-6 py-16 flex flex-col items-center">
       <h1 className="text-5xl font-bold text-center mb-4">
         AI Spend Audit
       </h1>

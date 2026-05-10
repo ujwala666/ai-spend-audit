@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { generateAudit } from "@/lib/audit";
 
 export default function AuditForm() {
   const [tool, setTool] = useState("");
@@ -9,6 +10,8 @@ export default function AuditForm() {
   const [seats, setSeats] = useState("");
   const [teamSize, setTeamSize] = useState("");
   const [useCase, setUseCase] = useState("");
+
+  const [result, setResult] = useState<any>(null);
 
   useEffect(() => {
     const savedData = localStorage.getItem("audit-form");
@@ -42,16 +45,16 @@ export default function AuditForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log({
+    const auditResult = generateAudit({
       tool,
       plan,
-      monthlySpend,
-      seats,
-      teamSize,
+      monthlySpend: Number(monthlySpend),
+      seats: Number(seats),
+      teamSize: Number(teamSize),
       useCase,
     });
 
-    alert("Audit submitted successfully!");
+    setResult(auditResult);
   };
 
   return (
@@ -60,7 +63,9 @@ export default function AuditForm() {
       className="bg-zinc-900 p-8 rounded-2xl w-full max-w-2xl space-y-6"
     >
       <div>
-        <label className="block mb-2 font-semibold">AI Tool</label>
+        <label className="block mb-2 font-semibold">
+          AI Tool
+        </label>
 
         <select
           value={tool}
@@ -78,11 +83,13 @@ export default function AuditForm() {
       </div>
 
       <div>
-        <label className="block mb-2 font-semibold">Plan</label>
+        <label className="block mb-2 font-semibold">
+          Plan
+        </label>
 
         <input
           type="text"
-          placeholder="Example: Pro / Team / Enterprise"
+          placeholder="Pro / Team / Enterprise"
           value={plan}
           onChange={(e) => setPlan(e.target.value)}
           className="w-full p-3 rounded-xl bg-black border border-zinc-700"
@@ -106,7 +113,9 @@ export default function AuditForm() {
       </div>
 
       <div>
-        <label className="block mb-2 font-semibold">Number of Seats</label>
+        <label className="block mb-2 font-semibold">
+          Number of Seats
+        </label>
 
         <input
           type="number"
@@ -119,7 +128,9 @@ export default function AuditForm() {
       </div>
 
       <div>
-        <label className="block mb-2 font-semibold">Team Size</label>
+        <label className="block mb-2 font-semibold">
+          Team Size
+        </label>
 
         <input
           type="number"
@@ -132,7 +143,9 @@ export default function AuditForm() {
       </div>
 
       <div>
-        <label className="block mb-2 font-semibold">Primary Use Case</label>
+        <label className="block mb-2 font-semibold">
+          Primary Use Case
+        </label>
 
         <select
           value={useCase}
@@ -155,6 +168,32 @@ export default function AuditForm() {
       >
         Generate Audit
       </button>
+
+      {result && (
+        <div className="bg-black border border-zinc-700 rounded-2xl p-6 mt-8">
+          <h2 className="text-2xl font-bold mb-4">
+            Audit Results
+          </h2>
+
+          <p className="mb-3">
+            <span className="font-semibold">
+              Recommendation:
+            </span>{" "}
+            {result.recommendation}
+          </p>
+
+          <p className="mb-3">
+            <span className="font-semibold">
+              Estimated Savings:
+            </span>{" "}
+            ${result.savings}/month
+          </p>
+
+          <p className="text-zinc-400">
+            {result.reason}
+          </p>
+        </div>
+      )}
     </form>
   );
 }

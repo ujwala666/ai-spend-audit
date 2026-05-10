@@ -39,3 +39,24 @@
 
 **Plan for tomorrow:**
 - Build the audit recommendation engine and savings calculations
+
+## Day 3 — 2026-05-09
+
+**Hours worked:** 5
+
+**What I did:**
+- Built the audit recommendation engine
+- Added savings calculations
+- Implemented recommendation logic for multiple AI tools
+- Displayed audit results dynamically on screen
+- Improved overall UI styling
+
+**What I learned:**
+- Learned how to separate business logic into utility files
+- Improved understanding of recommendation systems and conditional logic
+
+**Blockers / what I'm stuck on:**
+- Expanding pricing logic accuracy for different AI plans
+
+**Plan for tomorrow:**
+- Build a more professional results dashboard with annual savings and enhanced visuals
