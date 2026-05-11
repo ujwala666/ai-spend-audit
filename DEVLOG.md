@@ -125,3 +125,30 @@
 
 **Plan for tomorrow:**
 - Connect Next.js frontend with Spring Boot backend and persist audits in database
+
+# Day 7 — 2026-05-13
+
+**Hours worked:** 6
+
+**What I did:**
+
+- Connected Next.js frontend with Spring Boot backend
+- Integrated REST API for storing audit data in MySQL
+- Fixed CORS configuration for frontend–backend communication
+- Tested full flow from form submission to database storage
+- Debugged API request and response issues
+
+**What I learned:**
+
+- Learned full-stack integration between Next.js and Spring Boot
+- Understood how CORS works in real applications
+- Improved debugging skills for API and data flow issues
+
+**Blockers / what I'm stuck on:**
+
+- Minor mismatch between frontend payload and backend entity fields
+
+**Status:**
+
+- Project completed successfully with full frontend–backend integration
+- All core features working end-to-end

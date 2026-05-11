@@ -50,20 +50,54 @@ export default function AuditForm() {
 
   }, [tool, plan, monthlySpend, seats, teamSize, useCase]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
 
     e.preventDefault();
 
-    const auditResult = generateAudit({
+    const auditData = {
       tool,
       plan,
       monthlySpend: Number(monthlySpend),
       seats: Number(seats),
       teamSize: Number(teamSize),
       useCase,
-    });
+    };
 
-    setResult(auditResult);
+    try {
+
+      const response = await fetch(
+        "http://localhost:8082/api/audits",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(auditData),
+        }
+      );
+
+      if (response.ok) {
+
+        alert("Audit saved successfully!");
+
+        const auditResult = generateAudit(auditData);
+
+        setResult(auditResult);
+
+      } else {
+
+        alert("Failed to save audit");
+
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Backend connection failed");
+
+    }
+
   };
 
   return (
@@ -97,6 +131,7 @@ export default function AuditForm() {
             <option>GitHub Copilot</option>
 
             <option>Gemini</option>
+
           </select>
         </div>
 
@@ -182,6 +217,7 @@ export default function AuditForm() {
             <option>Data Analysis</option>
 
             <option>Mixed</option>
+
           </select>
         </div>
 
