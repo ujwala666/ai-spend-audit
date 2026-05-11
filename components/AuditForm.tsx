@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { generateAudit } from "@/lib/audit";
+import SavingsChart from "@/components/SavingsChart";
 
 export default function AuditForm() {
+
   const [tool, setTool] = useState("");
   const [plan, setPlan] = useState("");
   const [monthlySpend, setMonthlySpend] = useState("");
@@ -14,9 +16,11 @@ export default function AuditForm() {
   const [result, setResult] = useState<any>(null);
 
   useEffect(() => {
+
     const savedData = localStorage.getItem("audit-form");
 
     if (savedData) {
+
       const data = JSON.parse(savedData);
 
       setTool(data.tool || "");
@@ -26,11 +30,14 @@ export default function AuditForm() {
       setTeamSize(data.teamSize || "");
       setUseCase(data.useCase || "");
     }
+
   }, []);
 
   useEffect(() => {
+
     localStorage.setItem(
       "audit-form",
+
       JSON.stringify({
         tool,
         plan,
@@ -40,9 +47,11 @@ export default function AuditForm() {
         useCase,
       })
     );
+
   }, [tool, plan, monthlySpend, seats, teamSize, useCase]);
 
   const handleSubmit = (e: React.FormEvent) => {
+
     e.preventDefault();
 
     const auditResult = generateAudit({
@@ -58,6 +67,7 @@ export default function AuditForm() {
   };
 
   return (
+
     <div className="w-full max-w-4xl">
 
       <form
@@ -77,10 +87,15 @@ export default function AuditForm() {
             required
           >
             <option value="">Select Tool</option>
+
             <option>ChatGPT</option>
+
             <option>Claude</option>
+
             <option>Cursor</option>
+
             <option>GitHub Copilot</option>
+
             <option>Gemini</option>
           </select>
         </div>
@@ -157,10 +172,15 @@ export default function AuditForm() {
             required
           >
             <option value="">Select Use Case</option>
+
             <option>Coding</option>
+
             <option>Writing</option>
+
             <option>Research</option>
+
             <option>Data Analysis</option>
+
             <option>Mixed</option>
           </select>
         </div>
@@ -175,11 +195,13 @@ export default function AuditForm() {
       </form>
 
       {result && (
+
         <div className="mt-10 space-y-6">
 
           <div className="grid md:grid-cols-3 gap-4">
 
             <div className="bg-black border border-zinc-700 rounded-2xl p-6">
+
               <p className="text-zinc-400 text-sm mb-2">
                 Monthly Savings
               </p>
@@ -187,9 +209,11 @@ export default function AuditForm() {
               <h2 className="text-3xl font-bold text-green-400">
                 ${result.savings}
               </h2>
+
             </div>
 
             <div className="bg-black border border-zinc-700 rounded-2xl p-6">
+
               <p className="text-zinc-400 text-sm mb-2">
                 Annual Savings
               </p>
@@ -197,9 +221,11 @@ export default function AuditForm() {
               <h2 className="text-3xl font-bold text-blue-400">
                 ${result.annualSavings}
               </h2>
+
             </div>
 
             <div className="bg-black border border-zinc-700 rounded-2xl p-6">
+
               <p className="text-zinc-400 text-sm mb-2">
                 Optimization Score
               </p>
@@ -207,6 +233,7 @@ export default function AuditForm() {
               <h2 className="text-3xl font-bold text-yellow-400">
                 {result.score}/100
               </h2>
+
             </div>
 
           </div>
@@ -220,6 +247,7 @@ export default function AuditForm() {
             <div className="space-y-4">
 
               <div>
+
                 <p className="text-zinc-400 text-sm mb-1">
                   Recommendation
                 </p>
@@ -227,9 +255,11 @@ export default function AuditForm() {
                 <p className="text-xl font-semibold">
                   {result.recommendation}
                 </p>
+
               </div>
 
               <div>
+
                 <p className="text-zinc-400 text-sm mb-1">
                   Risk Level
                 </p>
@@ -237,9 +267,11 @@ export default function AuditForm() {
                 <p className="text-lg">
                   {result.risk}
                 </p>
+
               </div>
 
               <div>
+
                 <p className="text-zinc-400 text-sm mb-1">
                   Analysis
                 </p>
@@ -247,13 +279,27 @@ export default function AuditForm() {
                 <p className="text-zinc-300">
                   {result.reason}
                 </p>
+
               </div>
+
+              <button
+                className="mt-6 bg-white text-black px-6 py-3 rounded-xl font-semibold hover:scale-105 transition"
+                onClick={() => window.print()}
+              >
+                Download Report
+              </button>
 
             </div>
 
           </div>
 
+          <SavingsChart
+            monthly={result.savings}
+            annual={result.annualSavings}
+          />
+
         </div>
+
       )}
 
     </div>
