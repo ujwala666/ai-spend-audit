@@ -60,3 +60,68 @@
 
 **Plan for tomorrow:**
 - Build a more professional results dashboard with annual savings and enhanced visuals
+
+## Day 4 — 2026-05-10
+
+**Hours worked:** 5
+
+**What I did:**
+- Built a professional audit dashboard UI
+- Added annual savings calculations
+- Added optimization scoring system
+- Added risk-level analysis
+- Improved layout and overall product presentation
+
+**What I learned:**
+- Learned how to structure reusable dashboard result cards
+- Improved understanding of SaaS-style UI design
+
+**Blockers / what I'm stuck on:**
+- Making recommendation logic more advanced and realistic
+
+**Plan for tomorrow:**
+- Add charts, downloadable reports, and analytics visualizations
+
+
+## Day 5 — 2026-05-11
+
+**Hours worked:** 5
+
+**What I did:**
+- Added analytics charts using Recharts
+- Added downloadable audit report functionality
+- Enhanced dashboard visualization
+- Improved README documentation
+- Added advanced savings analytics
+
+**What I learned:**
+- Learned how to integrate chart libraries into React applications
+- Improved understanding of dashboard data visualization
+
+**Blockers / what I'm stuck on:**
+- Building more realistic AI pricing datasets
+
+**Plan for tomorrow:**
+- Add backend integration and database support
+
+
+## Day 6 — 2026-05-12
+
+**Hours worked:** 6
+
+**What I did:**
+- Created Spring Boot backend
+- Configured MySQL database
+- Built REST API for audit storage
+- Created JPA entity and repository
+- Tested backend endpoints successfully
+
+**What I learned:**
+- Learned Spring Boot REST API development
+- Improved understanding of database integration using JPA and MySQL
+
+**Blockers / what I'm stuck on:**
+- Connecting frontend and backend APIs cleanly
+
+**Plan for tomorrow:**
+- Connect Next.js frontend with Spring Boot backend and persist audits in database
