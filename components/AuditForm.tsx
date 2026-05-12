@@ -50,55 +50,21 @@ export default function AuditForm() {
 
   }, [tool, plan, monthlySpend, seats, teamSize, useCase]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
 
-    e.preventDefault();
+  e.preventDefault();
 
-    const auditData = {
-      tool,
-      plan,
-      monthlySpend: Number(monthlySpend),
-      seats: Number(seats),
-      teamSize: Number(teamSize),
-      useCase,
-    };
+  const auditResult = generateAudit({
+    tool,
+    plan,
+    monthlySpend: Number(monthlySpend),
+    seats: Number(seats),
+    teamSize: Number(teamSize),
+    useCase,
+  });
 
-    try {
-
-      const response = await fetch(
-        "http://localhost:8082/api/audits",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(auditData),
-        }
-      );
-
-      if (response.ok) {
-
-        alert("Audit saved successfully!");
-
-        const auditResult = generateAudit(auditData);
-
-        setResult(auditResult);
-
-      } else {
-
-        alert("Failed to save audit");
-
-      }
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert("Backend connection failed");
-
-    }
-
-  };
+  setResult(auditResult);
+};
 
   return (
 
